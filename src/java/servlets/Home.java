@@ -78,7 +78,7 @@ public class Home extends HttpServlet {
             response.sendRedirect("Home.jsp");
         }   String cookieName = "visitorName";
         Cookie nombreVisitante = new Cookie(cookieName, request.getParameter("nombre"));
-        nombreVisitante.setMaxAge(60*60*60*365);
+        nombreVisitante.setMaxAge(60*60*24*365);
         response.addCookie(nombreVisitante);
         response.sendRedirect("Visitor.jsp");
     }
