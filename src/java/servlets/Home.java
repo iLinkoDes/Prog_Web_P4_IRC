@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,7 +72,15 @@ public class Home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        
+        if(request.getParameter("nombre").isEmpty()){
+            response.sendRedirect("Home.jsp");
+        }   String cookieName = "visitorName";
+        Cookie nombreVisitante = new Cookie(cookieName, request.getParameter("nombre"));
+        nombreVisitante.setMaxAge(60*60*60*365);
+        response.addCookie(nombreVisitante);
+        response.sendRedirect("Visitor.jsp");
     }
 
     /**

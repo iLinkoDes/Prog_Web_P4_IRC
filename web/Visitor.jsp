@@ -1,17 +1,27 @@
-<%-- 
-    Document   : Visitor
-    Created on : 19 may 2024, 22:44:30
-    Author     : iLeLi
---%>
+<%
+    String cookieName = "visitorName";
+    String visitorName = "";
+    Cookie[] cookies = request.getCookies();
+    boolean existeCookie = false;
+    for (Cookie cookie : cookies){
+        if(cookieName.equals(cookie.getName())){
+            existeCookie = true;
+            visitorName = cookie.getValue();
+        }
+    }
+    if(!existeCookie){
+    response.sendRedirect("Home.jsp");
+    }
+%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Visitante</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Bienvenido <%=visitorName%></h1>
     </body>
 </html>
